@@ -137,3 +137,27 @@ span {
     max-width: 500px;
     margin: 0 auto 2rem;
 }
+.btn-fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: white;
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .btn-fav.liked {
+    color: #e50914;
+    animation: pop 0.3s;
+  }
+  
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+  
