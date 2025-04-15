@@ -21,7 +21,12 @@ async function loadFavoris() {
             const data = await res.json();
             console.log("Données film/serie :", data);  // Vérification des données film/serie
 
-            // Vérifier si les données existent pour éviter "undefined"
+            // Vérifier si les données sont valides
+            if (!data || (!data.title && !data.name)) {
+                console.warn(`Favori ignoré : données invalides pour l'ID ${fav.id}`);
+                continue; // Passer au favori suivant
+            }
+
             const posterPath = data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : 'path_to_default_image.jpg';
             const title = data.title || data.name || 'Titre non disponible';
             const overview = data.overview ? data.overview.substring(0, 120) + "..." : "Pas de description disponible.";
