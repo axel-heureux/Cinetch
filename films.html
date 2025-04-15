@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINETECH | Films Séries Favoris</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">CINETECH</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="films.html">Films</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="series.html">Séries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="favoris.html">Favoris</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <h1 class="text-center section-title text-white">Les mieux notés</h1>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Rechercher..." aria-label="Rechercher">
+                <button class="btn btn-outline-secondary" type="button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Feature Boxes -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <h3 class="feature-title">Faire un réseau de l'écran</h3>
+                    <p>Connectez vos appareils pour une expérience cinéma à la maison</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <h3 class="feature-title">L'écran</h3>
+                    <p>Profitez d'une qualité d'image exceptionnelle</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box">
+                    <h3 class="feature-title">Le réseau de l'écran</h3>
+                    <p>Partagez vos contenus entre tous vos appareils</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cards Grid -->
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+            <!-- Card 1 -->
+            <div class="col">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x450" class="card-img-top" alt="Film 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Film 1</h5>
+                        <p class="card-text">Description du film 1</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="col">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x450" class="card-img-top" alt="Film 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Film 2</h5>
+                        <p class="card-text">Description du film 2</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="col">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x450" class="card-img-top" alt="Film 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Film 3</h5>
+                        <p class="card-text">Description du film 3</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="col">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x450" class="card-img-top" alt="Film 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Film 4</h5>
+                        <p class="card-text">Description du film 4</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+</body>
+</html>
