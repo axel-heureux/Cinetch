@@ -66,5 +66,45 @@ function redirectToDetail(id, type) {
     window.location.href = `detail.html?id=${id}&type=${type}`;
 }
 
+// Fonction pour gérer l'entrée dans la barre de recherche
+async function handleSearchInput() {
+    const input = document.getElementById('search-input');
+    const query = input.value.trim();
+    const autocompleteList = document.getElementById('autocomplete-list');
+
+    // Si la recherche est vide, on efface les suggestions
+    if (!query) {
+        autocompleteList.innerHTML = '';
+        return;
+    }
+
+    try {
+        // Requête à l'API pour rechercher des séries
+        const res = await fetch(`${BASE_URL}/search/tv?api_key=${API_KEY}&language=fr-FR&query=${encodeURIComponent(query)}`);
+        const data = await res.json();
+
+        // Efface les suggestions précédentes
+        autocompleteList.innerHTML = '';
+
+        // Vérifie si des résultats existent
+        if (data.results && data.results.length > 0) {
+            data.results.slice(0, 5).forEach(serie => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item list-group-item-action';
+                listItem.textContent = serie.name || 'Titre non disponible';
+                listItem.onclick = () => redirectToDetail(serie.id, 'tv');
+                autocompleteList.appendChild(listItem);
+            });
+        } else {
+            const noResultItem = document.createElement('li');
+            noResultItem.className = 'list-group-item text-muted';
+            noResultItem.textContent = 'Aucun résultat trouvé';
+            autocompleteList.appendChild(noResultItem);
+        }
+    } catch (error) {
+        console.error('Erreur lors de la recherche :', error);
+    }
+}
+
 // Lancer la récupération des séries populaires lorsque la page est chargée
 document.addEventListener("DOMContentLoaded", fetchPopularSeries);
