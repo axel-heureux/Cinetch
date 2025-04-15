@@ -30,6 +30,7 @@ function displaySeries(series) {
                 <div class="card-body">
                     <h5 class="card-title">${serie.name}</h5>
                     <p class="card-text">${serie.overview ? serie.overview.substring(0, 120) + "..." : "Pas de description disponible."}</p>
+                    <button class="btn btn-dark" onclick="redirectToDetail(${serie.id}, 'tv')">Voir les détails</button>
                 </div>
                 <!-- Bouton cœur pour ajouter aux favoris -->
                 <button class="btn-fav ${isFav ? "liked" : ""}" onclick="toggleFavori(${serie.id}, 'tv', this)">
@@ -58,6 +59,11 @@ function toggleFavori(id, type, btn) {
 
     // Sauvegarder les favoris dans le localStorage
     localStorage.setItem("favoris", JSON.stringify(favoris));
+}
+
+// Fonction pour rediriger vers la page de détails
+function redirectToDetail(id, type) {
+    window.location.href = `detail.html?id=${id}&type=${type}`;
 }
 
 // Lancer la récupération des séries populaires lorsque la page est chargée

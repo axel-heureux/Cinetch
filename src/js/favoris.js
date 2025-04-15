@@ -40,6 +40,7 @@ async function loadFavoris() {
                     <div class="card-body">
                         <h5 class="card-title">${title}</h5>
                         <p class="card-text">${overview}</p>
+                        <button class="btn btn-dark" onclick="redirectToDetail(${data.id}, '${fav.type}')">Voir les détails</button>
                     </div>
                     <button class="btn-fav liked" onclick="toggleFavori(${data.id}, '${fav.type}', this)">
                         <i class="fa-solid fa-heart text-danger"></i>
@@ -70,4 +71,8 @@ function toggleFavori(id, type, btn) {
 
     // Recharger les favoris
     loadFavoris();
+}
+
+function redirectToDetail(id, type) {
+    window.location.href = `detail.html?id=${id}&type=${type}`;
 }

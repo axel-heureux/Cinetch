@@ -30,6 +30,7 @@ function displayMovies(movies) {
                 <div class="card-body">
                     <h5 class="card-title">${movie.title}</h5>
                     <p class="card-text">${movie.overview ? movie.overview.substring(0, 120) + "..." : "Pas de description disponible."}</p>
+                    <button class="btn btn-dark" onclick="redirectToDetail(${movie.id}, 'movie')">Voir les détails</button>
                 </div>
                 <!-- Bouton cœur pour ajouter aux favoris -->
                 <button class="btn-fav ${isFav ? "liked" : ""}" onclick="toggleFavori(${movie.id}, 'movie', this)">
@@ -58,6 +59,12 @@ function toggleFavori(id, type, btn) {
 
     // Sauvegarder les favoris dans le localStorage
     localStorage.setItem("favoris", JSON.stringify(favoris));
+}
+
+// Fonction pour rediriger vers la page de détails
+function redirectToDetail(id, type) {
+    console.log(`Redirection vers detail.html avec id=${id} et type=${type}`);
+    window.location.href = `detail.html?id=${id}&type=${type}`;
 }
 
 // Lancer la récupération des films populaires lorsque la page est chargée
