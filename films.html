@@ -34,13 +34,14 @@
     <h1 class="text-center section-title text-white">Tous les films populaires</h1>
 
     <!-- Search Bar -->
-    <div class="search-bar">
+    <div class="search-bar position-relative">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="search-input" placeholder="Rechercher..." aria-label="Rechercher" />
-        <button class="btn btn-outline-secondary" type="button" id="search-button">
+        <input type="text" class="form-control" id="search-input" placeholder="Rechercher un film..." aria-label="Rechercher" oninput="handleSearchInput()">
+        <button class="btn btn-outline-secondary" type="button">
           <i class="bi bi-search"></i>
         </button>
       </div>
+      <ul id="autocomplete-list" class="list-group position-absolute w-100" style="z-index: 1000;"></ul>
     </div>
 
     <!-- Cards Grid -->
