@@ -63,8 +63,47 @@ function toggleFavori(id, type, btn) {
 
 // Fonction pour rediriger vers la page de détails
 function redirectToDetail(id, type) {
-    console.log(`Redirection vers detail.html avec id=${id} et type=${type}`);
     window.location.href = `detail.html?id=${id}&type=${type}`;
+}
+
+// Fonction pour gérer l'entrée dans la barre de recherche
+async function handleSearchInput() {
+    const input = document.getElementById('search-input');
+    const query = input.value.trim();
+    const autocompleteList = document.getElementById('autocomplete-list');
+
+    // Si la recherche est vide, on efface les suggestions
+    if (!query) {
+        autocompleteList.innerHTML = '';
+        return;
+    }
+
+    try {
+        // Requête à l'API pour rechercher des films
+        const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=fr-FR&query=${encodeURIComponent(query)}`);
+        const data = await res.json();
+
+        // Efface les suggestions précédentes
+        autocompleteList.innerHTML = '';
+
+        // Vérifie si des résultats existent
+        if (data.results && data.results.length > 0) {
+            data.results.slice(0, 5).forEach(movie => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item list-group-item-action';
+                listItem.textContent = movie.title || 'Titre non disponible';
+                listItem.onclick = () => redirectToDetail(movie.id, 'movie');
+                autocompleteList.appendChild(listItem);
+            });
+        } else {
+            const noResultItem = document.createElement('li');
+            noResultItem.className = 'list-group-item text-muted';
+            noResultItem.textContent = 'Aucun résultat trouvé';
+            autocompleteList.appendChild(noResultItem);
+        }
+    } catch (error) {
+        console.error('Erreur lors de la recherche :', error);
+    }
 }
 
 // Lancer la récupération des films populaires lorsque la page est chargée

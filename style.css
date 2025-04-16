@@ -199,26 +199,3 @@ span {
     border-radius: 10px;
 }
 
-/* Commentaires */
-.comment-card {
-    background: #0d253f;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-.comment-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-}
-
-.comment-author {
-    color: #e03d1b;
-    font-weight: bold;
-}
-
-.comment-date {
-    color: #6c757d;
-    font-size: 0.8rem;
-}
