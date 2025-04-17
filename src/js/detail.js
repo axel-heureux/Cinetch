@@ -72,9 +72,103 @@ function displaySimilarMovies(movies) {
     });
 }
 
+async function fetchReviews() {
+    try {
+        // Récupérer les avis depuis l'API (endpoint en lecture seule)
+        const res = await fetch(`${BASE_URL}/${movieType}/${movieId}/reviews?api_key=${API_KEY}&language=fr-FR`);
+        const data = await res.json();
+        let apiReviews = data.results || [];
+
+        // Charger les avis enregistrés en localStorage pour ce film
+        const localReviewsJSON = localStorage.getItem(`reviews_${movieId}`);
+        let localReviews = localReviewsJSON ? JSON.parse(localReviewsJSON) : [];
+        
+        // Combiner les avis de l'API et ceux du localStorage
+        const combinedReviews = [...apiReviews, ...localReviews];
+
+        displayReviews(combinedReviews);
+    } catch (err) {
+        console.error("Erreur lors de la récupération des avis :", err);
+    }
+}
+
+function displayReviews(reviews) {
+    const reviewsContainer = document.getElementById('reviews-list');
+    reviewsContainer.innerHTML = '';
+    if (!reviews || reviews.length === 0) {
+        reviewsContainer.innerHTML = '<p class="text-white">Aucun avis pour le moment.</p>';
+        return;
+    }
+    reviews.forEach(review => {
+        const reviewDate = review.created_at ? new Date(review.created_at).toLocaleDateString('fr-FR') : 'Date inconnue';
+        let ratingStars = '';
+        if (review.rating) {
+            const fullStars = parseInt(review.rating);
+            const emptyStars = 5 - fullStars;
+            for(let i = 0; i < fullStars; i++){
+                ratingStars += `<span style="color: yellow;">★</span>`;
+            }
+            for(let i = 0; i < emptyStars; i++){
+                ratingStars += `<span style="color: grey;">★</span>`;
+            }
+        }
+        const reviewDiv = document.createElement('div');
+        reviewDiv.className = 'review bg-dark p-3 mb-2 rounded';
+        reviewDiv.innerHTML = `
+            <p class="text-white">
+                <strong>${review.author || 'Anonyme'}</strong> - 
+                <small>${reviewDate}</small>
+                ${ratingStars ? `<br>${ratingStars}` : ''}
+            </p>
+            <p class="text-white">${review.content}</p>
+        `;
+        reviewsContainer.appendChild(reviewDiv);
+    });
+}
+
+async function submitReview(event) {
+    event.preventDefault();
+    const author = document.getElementById('review-author').value.trim();
+    const reviewText = document.getElementById('review-text').value.trim();
+    const rating = document.querySelector('input[name="rating"]:checked')?.value;
+    if (!author || !reviewText) {
+        alert("Veuillez renseigner votre nom et saisir votre avis.");
+        return;
+    }
+    if (!rating) {
+        alert("Veuillez sélectionner une note.");
+        return;
+    }
+    try {
+        const newReview = {
+            author: author,
+            content: reviewText,
+            created_at: new Date().toISOString(),
+            rating: rating
+        };
+
+        const localReviewsKey = `reviews_${movieId}`;
+        const existingReviews = localStorage.getItem(localReviewsKey);
+        let localReviews = existingReviews ? JSON.parse(existingReviews) : [];
+
+        localReviews.push(newReview);
+        localStorage.setItem(localReviewsKey, JSON.stringify(localReviews));
+
+        fetchReviews();
+        document.getElementById('review-form').reset();
+    } catch (err) {
+        console.error("Erreur lors de l'enregistrement de l'avis :", err);
+        alert("Une erreur est survenue lors de l'enregistrement de votre avis.");
+    }
+}
+
 function redirectToDetail(id, type) {
     window.location.href = `detail.html?id=${id}&type=${type}`;
 }
 
-// Charger les détails au chargement de la page
-document.addEventListener('DOMContentLoaded', fetchMovieDetails);
+// Charger les détails et les avis au chargement de la page
+document.addEventListener('DOMContentLoaded', () => {
+    fetchMovieDetails();
+    fetchReviews();
+    document.getElementById('review-form').addEventListener('submit', submitReview);
+});

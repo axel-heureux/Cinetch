@@ -31,6 +31,41 @@
         <div id="movie-details" class="row">
             <!-- Les détails du film/série seront injectés ici -->
         </div>
+
+        <!-- Section Avis -->
+        <section id="reviews" class="mt-5">
+            <h3 class="text-white">Avis</h3>
+            <div id="reviews-list" class="mb-3">
+                <!-- Les avis existants seront injectés ici -->
+            </div>
+            <form id="review-form">
+                <div class="mb-3">
+                    <label for="review-author" class="form-label text-white">Nom :</label>
+                    <input type="text" id="review-author" class="form-control" placeholder="Votre nom">
+                </div>
+                <div class="mb-3">
+                    <label for="review-text" class="form-label text-white">Votre avis :</label>
+                    <textarea id="review-text" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">Note :</label>
+                    <div id="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </section>
+
         <h3 class="mt-5 text-white">Suggestions similaires</h3>
         <div id="similar-movies" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
             <!-- Les suggestions similaires seront injectées ici -->

@@ -199,3 +199,21 @@ span {
     border-radius: 10px;
 }
 
+#star-rating {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    font-size: 2rem; /* taille agrandie */
+}
+#star-rating input {
+    display: none;
+}
+#star-rating label {
+    color: grey;
+    cursor: pointer;
+}
+/* Lorsque l'étoile est sélectionnée ou survolée */
+#star-rating input:checked ~ label,
+#star-rating label:hover,
+#star-rating label:hover ~ label {
+    color: yellow;
+}
