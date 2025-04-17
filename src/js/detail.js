@@ -26,7 +26,7 @@ function displayMovieDetails(movie) {
             <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" class="img-fluid" alt="${movie.title || movie.name}">
         </div>
         <div class="col-md-8 text-light">
-            <h2">${movie.title || movie.name}</h2>
+            <h2 style="font-size: 2.5rem;">${movie.title || movie.name}</h2>
             <p><strong>Réalisateur :</strong> ${movie.created_by?.map(creator => creator.name).join(', ') || 'Non disponible'}</p>
             <p><strong>Genres :</strong> ${movie.genres.map(genre => genre.name).join(', ')}</p>
             <p><strong>Pays d'origine :</strong> ${movie.production_countries.map(country => country.name).join(', ')}</p>
@@ -34,8 +34,6 @@ function displayMovieDetails(movie) {
             <p><strong>Acteurs principaux :</strong> <span id="actors-list">Chargement...</span></p>
         </div>
     `;
-
-    // Charger les acteurs
     fetchMovieCredits(movie.id);
 }
 
